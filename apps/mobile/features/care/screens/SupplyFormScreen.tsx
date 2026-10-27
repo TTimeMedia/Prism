@@ -48,6 +48,9 @@ export function SupplyFormScreen() {
   const [medicationId, setMedicationId] = useState<string>(NO_MEDICATION);
   const [quantity, setQuantity] = useState('');
   const [unit, setUnit] = useState('');
+  // Bumped only when a unit chip is tapped, so the Unit field picks up the
+  // chip without remounting (and closing the keyboard) on every keystroke.
+  const [unitChipTaps, setUnitChipTaps] = useState(0);
   const [perDose, setPerDose] = useState('');
   const [refillOn, setRefillOn] = useState('');
   const [pharmacy, setPharmacy] = useState('');
@@ -152,14 +155,17 @@ export function SupplyFormScreen() {
               label="Unit (optional)"
               placeholder="mL, vials, syringes…"
               defaultValue={unit}
-              key={`unit-${unit}`}
+              key={`unit-${unitChipTaps}`}
               onChangeText={setUnit}
               maxLength={30}
             />
             <PRISMChipGroup
               options={UNIT_CHOICES.map((u) => ({ value: u, label: u }))}
               value={unit ? [unit] : []}
-              onChange={(next) => setUnit(next[next.length - 1] ?? '')}
+              onChange={(next) => {
+                setUnit(next[next.length - 1] ?? '');
+                setUnitChipTaps((n) => n + 1);
+              }}
             />
             {linked ? (
               <PRISMInput

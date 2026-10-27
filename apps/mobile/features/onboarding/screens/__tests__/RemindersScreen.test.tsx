@@ -37,7 +37,8 @@ describe('RemindersScreen', () => {
     expect(screen.getByText('Turn on notifications.')).toBeTruthy();
     expect(screen.getByText(/Dose and shot reminders/)).toBeTruthy();
     expect(screen.getByText(/before each appointment/)).toBeTruthy();
-    expect(screen.getByText(/supply runs out/)).toBeTruthy();
+    // Supplies are paused for maintenance (lib/care/suppliesEnabled.ts).
+    expect(screen.queryByText(/supply runs out/)).toBeNull();
   });
 
   it('asks the phone for permission and moves on once it is granted', async () => {

@@ -99,6 +99,7 @@ export function SectionTitle({
 /**
  * What a section looks like before anything is in it: a small icon, one
  * line on what it's for, and one clear button to begin. Never a blank gap.
+ * Without a button it doubles as a notice (supplies under maintenance).
  */
 export function EmptyCard({
   icon: Icon,
@@ -114,8 +115,8 @@ export function EmptyCard({
   tint: Tint;
   title: string;
   body: string;
-  primaryLabel: string;
-  onPrimary: () => void;
+  primaryLabel?: string;
+  onPrimary?: () => void;
   secondaryLabel?: string;
   onSecondary?: () => void;
 }) {
@@ -142,12 +143,14 @@ export function EmptyCard({
         {title}
       </Text>
       <Text style={[styles.emptyBody, { color: theme.colors.text.secondary }]}>{body}</Text>
-      <View style={styles.emptyActions}>
-        <PRISMButton label={primaryLabel} onPress={onPrimary} />
-        {secondaryLabel && onSecondary ? (
-          <PRISMButton label={secondaryLabel} variant="tertiary" onPress={onSecondary} />
-        ) : null}
-      </View>
+      {primaryLabel && onPrimary ? (
+        <View style={styles.emptyActions}>
+          <PRISMButton label={primaryLabel} onPress={onPrimary} />
+          {secondaryLabel && onSecondary ? (
+            <PRISMButton label={secondaryLabel} variant="tertiary" onPress={onSecondary} />
+          ) : null}
+        </View>
+      ) : null}
     </View>
   );
 }

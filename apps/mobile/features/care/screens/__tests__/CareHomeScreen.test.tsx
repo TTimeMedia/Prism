@@ -68,6 +68,13 @@ describe('CareHomeScreen', () => {
     expect(screen.getByText('Add appointment')).toBeTruthy();
   });
 
+  it('says supplies are under maintenance instead of offering to add one', () => {
+    renderWithProviders(<CareHomeScreen />);
+
+    expect(screen.getByText('Supplies are getting a tune-up')).toBeTruthy();
+    expect(screen.queryByLabelText('Add a supply')).toBeNull();
+  });
+
   it('starts adding from the button under each block', () => {
     renderWithProviders(<CareHomeScreen />);
 

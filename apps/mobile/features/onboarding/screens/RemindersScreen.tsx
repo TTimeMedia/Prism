@@ -7,6 +7,7 @@ import { radius, spacing, type, useTheme } from '@prism/ui';
 import { OnboardingScreenLayout } from '../components/OnboardingScreenLayout';
 import { Reveal } from '../../../components/motion';
 import { onboardingStepHref } from '../../../lib/onboarding/routes';
+import { SUPPLIES_ENABLED } from '../../../lib/care/suppliesEnabled';
 import { useUpdateProfile } from '../../../lib/profile/queries';
 import { requestNotificationPermissions } from '../../../lib/reminders/notificationScheduler';
 
@@ -14,7 +15,9 @@ import { requestNotificationPermissions } from '../../../lib/reminders/notificat
 const USES: { icon: LucideIcon; text: string }[] = [
   { icon: Pill, text: 'Dose and shot reminders, with one follow-up if a dose is missed' },
   { icon: CalendarDays, text: 'A heads-up before each appointment' },
-  { icon: Package, text: 'A reminder before a supply runs out or needs a refill' },
+  ...(SUPPLIES_ENABLED
+    ? [{ icon: Package, text: 'A reminder before a supply runs out or needs a refill' }]
+    : []),
 ];
 
 /**
