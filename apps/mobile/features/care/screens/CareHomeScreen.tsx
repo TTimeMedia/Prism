@@ -15,8 +15,9 @@ import {
 import { useModules } from '../../../lib/profile/queries';
 import { useAppointments, useMedications } from '../../../lib/care/queries';
 import { useSupplies } from '../../../lib/care/supplies';
+import { SUPPLIES_ENABLED } from '../../../lib/care/suppliesEnabled';
 import { outlookLabel, supplyOutlook } from '../../../lib/care/supplyOutlook';
-import { Package } from 'lucide-react-native';
+import { Package, Wrench } from 'lucide-react-native';
 import { resolveNextMedicationOccurrence } from '../../../lib/reminders/scheduleResolution';
 import { formatComingUpWhen } from '../../../lib/today/comingUp';
 import {
@@ -220,7 +221,18 @@ export function CareHomeScreen() {
             ) : null}
 
             {/* Supplies */}
-            {enabled.has('medications') ? (
+            {enabled.has('medications') && !SUPPLIES_ENABLED ? (
+              <>
+                <SectionTitle title="Supplies" />
+                <EmptyCard
+                  icon={Wrench}
+                  tint="violet"
+                  title="Supplies are getting a tune-up"
+                  body="We know the Unit box kept closing your keyboard, and we're fixing it. Supplies are hidden for now. Your saved ones are safe and will be back soon."
+                />
+              </>
+            ) : null}
+            {enabled.has('medications') && SUPPLIES_ENABLED ? (
               <>
                 <SectionTitle
                   title="Supplies"

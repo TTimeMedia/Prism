@@ -15,6 +15,7 @@ import { useSession } from '../auth/AuthProvider';
 import { useModules, useSettings } from '../profile/queries';
 import { useAppointments, useMedications } from '../care/queries';
 import { useSupplies } from '../care/supplies';
+import { SUPPLIES_ENABLED } from '../care/suppliesEnabled';
 import { supplyReminderTimes } from '../care/supplyOutlook';
 import {
   NUDGE_DELAY_MINUTES,
@@ -120,7 +121,8 @@ export function useReminderSync(): void {
 
     let cancelled = false;
     void (async () => {
-      const supplyList = medicationsEnabled ? (supplies ?? []) : [];
+      // An empty list also clears supply reminders already scheduled.
+      const supplyList = medicationsEnabled && SUPPLIES_ENABLED ? (supplies ?? []) : [];
       const wantsReminders =
         supplyList.some(
           (s) =>
