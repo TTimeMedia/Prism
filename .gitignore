@@ -45,3 +45,6 @@ coverage/
 *.log
 npm-debug.log*
 pnpm-debug.log*
+
+# Team desk - tester details, drafts and approvals (repo is public)
+ops/team/desk/
