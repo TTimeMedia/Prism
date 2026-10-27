@@ -15,7 +15,9 @@ The team is defined in `.claude/agents/`. Agent Teams is on for this project (`.
 | `release` | release-manager |
 | `privacy` | privacy-compliance |
 
-The desk is `ops/team/desk/` (gitignored, because the repo is public): `approvals.md`, `state.json`, `engineering.md`, `content-calendar.md`, `compliance.md`, `release-notes/`, `briefs/`. Create any missing file from `ops/team/templates/`.
+**The desk is in Notion.** It is the private page "Prism Team Desk" (406fa1769f29816686dafe8e96b5a306). Wherever this skill or an agent file says `ops/team/desk/<file>`, use the child page of the same name: Approvals, Briefs (one child page per date), Engineering, Content calendar, Compliance, and State (its JSON block replaces state.json). Release notes go in that day's brief.
+
+A cloud routine ("Prism team morning round", claude.ai/code/routines) runs the round every day at 8:53 AM Pacific without the laptop. It skips the engineer and the inbox; `/team` in a live session can do both.
 
 ## `/team start` — open the office
 

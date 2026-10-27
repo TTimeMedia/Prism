@@ -22,4 +22,8 @@ The team runs as a Claude Code **Agent Team** (experimental; turned on in the gi
 
 ## The desk
 
-Working files live in `ops/team/desk/`, which is **gitignored** because this repo is public and the desk holds tester details. `ops/team/templates/` has the starting files.
+The working files live in a private Notion page ("Prism Team Desk"), because they hold tester details and this repo is public. `ops/team/templates/` shows the starting layout.
+
+## Every morning
+
+A Claude Code cloud routine, "Prism team morning round", runs the round at 8:53 AM Pacific even when the laptop is off. It checks the support table and drafts social posts into Notion. It skips bug fixes and the hello@ inbox, which need a live session.
